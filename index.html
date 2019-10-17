@@ -43,6 +43,22 @@
     width: 100%;
     height: 100%;
   }
+
+  @media (max-width: 800px) {
+    .wrapper {
+      padding: 0 1rem;
+    }
+
+    .wrapper > header {
+      display: flex;
+      transform: none;
+      flex-flow: column nowrap;
+    }
+
+    .wrapper > header img {
+      height: 128px;
+    }
+  }
   </style>
 </head>
 <body>
