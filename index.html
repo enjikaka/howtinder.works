@@ -59,14 +59,26 @@
       height: 128px;
     }
   }
+
+  #play {
+    background-color: #FF3270;
+    color: white;
+    padding: 0.8em 1em;
+    border-radius: 4px;
+    border: 0;
+    font-size: 0.8rem;
+    cursor: pointer;
+  }
   </style>
 </head>
 <body>
+  <audio src="song.mp3"></audio>
   <div class="wrapper">
     <header>
       <img src="https://1000logos.net/wp-content/uploads/2018/07/tinder-logo-768x432.png" alt="Tinder Logo">
       <h1>How Tinder Works</h1>
     </header>
+    <button id="play">Play appropriate music while reading</button>
     <section>
       <article>
         <header>
@@ -133,5 +145,10 @@
       You are welcome Kristian. Kind regards, Jeremy.
     </footer>
   </div>
+  <script>
+  document.querySelector('#play').addEventListener('click', () => {
+    document.querySelector('audio').play();
+  });
+  </script>
 </body>
 </html>
