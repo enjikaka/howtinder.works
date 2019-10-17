@@ -77,7 +77,7 @@
       <img src="https://1000logos.net/wp-content/uploads/2018/07/tinder-logo-768x432.png" alt="Tinder Logo">
       <h1>How Tinder Works</h1>
     </header>
-    <button id="play">Play appropriate music while reading</button><br><br>
+    <button id="play">Play appropriate music while reading</button>
     <audio src="song.mp3"></audio>
     <section>
       <article>
@@ -146,10 +146,14 @@
     </footer>
   </div>
   <script>
-  document.querySelector('#play').addEventListener('click', () => {
-    document.querySelector('audio').play();
-    document.querySelector('audio').setAttribute('controls', 'controls');
-  });
+  const btn = document.querySelector('#play');
+  const audio = document.querySelector('audio');
+
+  btn.addEventListener('click', () => {
+    audio.play();
+    audio.setAttribute('controls', 'controls');
+    btn.remove();
+  }, { once: true });
   </script>
 </body>
 </html>
