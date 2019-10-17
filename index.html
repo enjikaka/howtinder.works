@@ -51,6 +51,10 @@
     padding-top: 0.5rem;
   }
 
+  #name {
+    text-transform: capitalize;
+  }
+
   @media (max-width: 973px) {
     .wrapper {
       padding: 0 1rem;
@@ -108,7 +112,7 @@
         </p>
 
         <p>
-          As you swipe you see her. That girl that makes every limb tingle. Her summer freckles, the ocean blue eyes, hair like a golden water fall and the smile like a thousand suns. You throw her a superlike. <sup>(Hej Sofie!)</sup>
+          As you swipe you see her. That girl that makes every limb tingle. Her summer freckles, the ocean blue eyes, hair like a golden water fall and the smile like a thousand suns. You throw her a superlike. <sup>(Hej <span id="name">Sofie</span>!)</sup>
         </p>
       </article>
 
@@ -163,6 +167,15 @@
     audio.setAttribute('controls', 'controls');
     btn.remove();
   }, { once: true });
+
+  const maybeCustomName = document.location.pathname.split('/').pop();
+
+  if (
+    maybeCustomName !== 'howtinder.works' &&
+    maybeCustomName !== 'index.html'
+  ) {
+    document.querySelector('#name').textContent = maybeCustomName;
+  }
   </script>
 </body>
 </html>
