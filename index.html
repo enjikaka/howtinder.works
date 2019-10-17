@@ -28,6 +28,21 @@
     max-width: 800px;
     margin: 2rem auto;
   }
+
+  .sixteen-nine {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+  }
+
+  iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
   </style>
 </head>
 <body>
@@ -90,9 +105,11 @@
       </p>
 
       <p>
-        This might help though.<br><br>
+        This might help though.
+      </p>
 
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/ZuzPcW4djrA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <p class="sixteen-nine">
+        <iframe src="https://www.youtube.com/embed/ZuzPcW4djrA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </p>
     </article>
 
