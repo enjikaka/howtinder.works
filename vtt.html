@@ -47,7 +47,7 @@
 
       const cueToId = cue => `cue--${String(cue.startTime).replace('.', '')}--${String(cue.endTime).replace('.', '')}`;
 
-      videoEl.addEventListener('canplay', () => {
+      videoEl.addEventListener('playing', () => {
         ol.innerHTML = [...trackEl.track.cues].map((cue, i) => `
           <li id="${cueToId(cue)}">${cue.text}</li>
         `).join('');
