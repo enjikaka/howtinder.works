@@ -1,0 +1,72 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WebVTT Lyrics</title>
+</head>
+<body>
+  <video src="sriracha-jeremy.mp3" controls>
+    <track default src="sriracha-jeremy.vtt" kind="descriptions" srclang="en" label="Lyrics">
+  </video>
+
+  <lyrics-display></lyrics-display>
+
+  <script type="module">
+  import { registerFunctionComponent } from 'https://unpkg.com/webact?module';
+
+  const trackEl = document.querySelector('track');
+
+  async function LyricsDisplay () {
+    const { html, css, postRender, $ } = this;
+
+    html`
+      <ol></ol>
+    `;
+
+    css`
+    ol {
+      line-height: 1.5rem;
+      list-style: none;
+      text-align: center;
+      font-family: monospace;
+    }
+
+    li {
+      transition: all 150ms ease;
+    }
+
+    [data-current] {
+      font-weight: bold;
+      transform: scale(1.1);
+    }
+    `;
+
+    postRender(() => {
+      const ol = $('ol');
+
+      const cueToId = cue => `cue--${String(cue.startTime).replace('.', '')}--${String(cue.endTime).replace('.', '')}`;
+
+      ol.innerHTML = [...trackEl.track.cues].map((cue, i) => `
+        <li id="${cueToId(cue)}">${cue.text}</li>
+      `).join('');
+
+      trackEl.addEventListener('cuechange', event => {
+        const cue = event.target.track.activeCues[0];
+
+        const previousRow = $(`[data-current]`);
+
+        if (previousRow) {
+          previousRow.removeAttribute('data-current');
+        }
+
+        const cueueRow = $('#' + cueToId(cue));
+
+        cueueRow.setAttribute('data-current', '');
+      });
+    });
+  }
+
+  registerFunctionComponent(LyricsDisplay);
+  </script>
+</body>
+</html>
