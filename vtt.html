@@ -9,15 +9,13 @@
     <track default src="sriracha-jeremy.vtt" kind="descriptions" srclang="en" label="Lyrics">
   </video>
 
+  <lyrics-display></lyrics-display>
+
   <script type="module">
   import { registerFunctionComponent } from 'https://unpkg.com/webact?module';
 
   const trackEl = document.querySelector('track');
   const videoEl = document.querySelector('video');
-
-  videoEl.addEventListener('canplay', () => {
-    document.body.innerHTML += '<lyrics-display></lyrics-display>';
-  });
 
   async function LyricsDisplay () {
     const { html, css, postRender, $ } = this;
@@ -49,9 +47,11 @@
 
       const cueToId = cue => `cue--${String(cue.startTime).replace('.', '')}--${String(cue.endTime).replace('.', '')}`;
 
-      ol.innerHTML = [...trackEl.track.cues].map((cue, i) => `
-        <li id="${cueToId(cue)}">${cue.text}</li>
-      `).join('');
+      videoEl.addEventListener('canplay', () => {
+        ol.innerHTML = [...trackEl.track.cues].map((cue, i) => `
+          <li id="${cueToId(cue)}">${cue.text}</li>
+        `).join('');
+      });
 
       trackEl.addEventListener('cuechange', event => {
         const cue = event.target.track.activeCues[0];
