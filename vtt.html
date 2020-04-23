@@ -9,12 +9,15 @@
     <track default src="sriracha-jeremy.vtt" kind="descriptions" srclang="en" label="Lyrics">
   </video>
 
-  <lyrics-display></lyrics-display>
-
   <script type="module">
   import { registerFunctionComponent } from 'https://unpkg.com/webact?module';
 
   const trackEl = document.querySelector('track');
+  const videoEl = document.querySelector('video');
+
+  videoEl.addEventListener('canplay', () => {
+    document.body.innerHTML += '<lyrics-display></lyrics-display>';
+  });
 
   async function LyricsDisplay () {
     const { html, css, postRender, $ } = this;
